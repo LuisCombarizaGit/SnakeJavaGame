@@ -112,10 +112,34 @@ public class GamePanel extends JPanel implements ActionListener {
     // This method checks if the snake collides with 1. Itself , 2. Walls.
     public void checkCollisions(){
 
+        // Check if collides with body:
         for(int i = bodyParts; i>0;i--){
             if((x[0] == x[i]) && (y[0] == y[i])){
                 running = false;
             }
+        }
+
+        // Check if collides with left wall
+        if(x[0] < 0){
+            running = false;
+        }
+
+        // Check if collides with right wall
+        if(x[0] > SCREEN_WIDTH){
+            running = false;
+        }
+
+        // Check if collision with top wall
+        if(y[0] <0){
+            running = false;
+        }
+        // Check if collision with bottom wall
+        if(y[0] > SCREEN_HEIGHT){
+            running = false;
+        }
+
+        if(!running){
+            timer.stop();
         }
 
     }
@@ -138,6 +162,34 @@ public class GamePanel extends JPanel implements ActionListener {
     public class MyKeyAdapter extends KeyAdapter{
         @Override
         public void keyPressed(KeyEvent e){
+            switch (e.getKeyCode()){
+                case KeyEvent.VK_LEFT:
+                    if(direction != 'R'){
+                        direction = 'L';
+                    }
+                    break;
+            }
+            switch (e.getKeyCode()) {
+                case KeyEvent.VK_RIGHT:
+                    if (direction != 'L') {
+                        direction = 'R';
+                    }
+                    break;
+            }
+                switch (e.getKeyCode()) {
+                    case KeyEvent.VK_UP:
+                        if (direction != 'D') {
+                            direction = 'U';
+                        }
+                        break;
+                }
+                    switch (e.getKeyCode()) {
+                        case KeyEvent.VK_DOWN:
+                            if (direction != 'U') {
+                                direction = 'D';
+                            }
+                            break;
+                    }
 
         }
     }
