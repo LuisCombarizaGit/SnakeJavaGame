@@ -1,6 +1,8 @@
 import javax.swing.*;
 
 public class GameFrame extends JFrame {
+
+    // This method sets the information of the frame.
     GameFrame(){
 
         this.add(new GamePanel());

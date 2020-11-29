@@ -8,6 +8,7 @@ import java.util.Random;
 
 public class GamePanel extends JPanel implements ActionListener {
 
+    // Variables used in game
     static final int SCREEN_WIDTH = 600;
     static final int SCREEN_HEIGHT = 600;
     static final int UNIT_SIZE = 25;
@@ -24,7 +25,7 @@ public class GamePanel extends JPanel implements ActionListener {
     Timer timer;
     Random random;
 
-
+    // Setting up the game panel
     GamePanel(){
         random = new Random();
         this.setPreferredSize(new Dimension(SCREEN_WIDTH,SCREEN_HEIGHT));
@@ -34,6 +35,7 @@ public class GamePanel extends JPanel implements ActionListener {
         startGame();
     }
 
+    // This method starts the game when called
     public void startGame(){
         newApple();
         running = true;
@@ -41,11 +43,13 @@ public class GamePanel extends JPanel implements ActionListener {
         timer.start();
     }
 
+    // This methods draws the components of the game (Snake and Apple)
     public void paintComponent(Graphics g){
         super.paintComponent(g);
         draw(g);
 
     }
+    // This methods draws the components of the game (Snake and Apple)
     public void draw(Graphics g){
 
         for(int i=0; i<SCREEN_HEIGHT/UNIT_SIZE; i++){
@@ -67,11 +71,15 @@ public class GamePanel extends JPanel implements ActionListener {
         }
 
     }
+
+    // This method creates a random location to paint the apple when game starts
     public void newApple(){
         appleX = random.nextInt((int)(SCREEN_WIDTH/UNIT_SIZE))*UNIT_SIZE;
         appleY = random.nextInt((int)(SCREEN_WIDTH/UNIT_SIZE))*UNIT_SIZE;
 
     }
+
+    // This method moves the snake based on the matrix of the game board.
     public void move(){
         for(int i = bodyParts; i>0;i--){
             x[i] = x[i-1];
@@ -95,11 +103,20 @@ public class GamePanel extends JPanel implements ActionListener {
 
     }
 
+    // This method checks if apple location has been hit by head of snake
+    // meaning that the snake has gotten the apple
     public void checkApple(){
 
     }
 
+    // This method checks if the snake collides with 1. Itself , 2. Walls.
     public void checkCollisions(){
+
+        for(int i = bodyParts; i>0;i--){
+            if((x[0] == x[i]) && (y[0] == y[i])){
+                running = false;
+            }
+        }
 
     }
 
@@ -108,8 +125,14 @@ public class GamePanel extends JPanel implements ActionListener {
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-        
 
+        if(running){
+            move();
+            checkApple();
+            checkCollisions();
+
+        }
+        repaint();
     }
 
     public class MyKeyAdapter extends KeyAdapter{
