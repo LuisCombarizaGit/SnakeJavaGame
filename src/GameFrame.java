@@ -1,3 +1,8 @@
+// Snake  ==== >
+// Luis Combariza Nov 29, 2020
+// luis_combariza@outlookl.com
+
+
 import javax.swing.*;
 
 public class GameFrame extends JFrame {

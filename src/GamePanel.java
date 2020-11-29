@@ -1,3 +1,7 @@
+// Snake  ==== >
+// Luis Combariza Nov 29, 2020
+// luis_combariza@outlook.com
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -190,6 +194,7 @@ public class GamePanel extends JPanel implements ActionListener {
         repaint();
     }
 
+    // Movement method for each key press
     public class MyKeyAdapter extends KeyAdapter{
         @Override
         public void keyPressed(KeyEvent e){
